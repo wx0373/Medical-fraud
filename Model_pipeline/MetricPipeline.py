@@ -20,7 +20,7 @@ class Metric_pipeline(object):
         from sklearn.metrics import roc_auc_score
         roc_auc_score_train = roc_auc_score(self.y_train, self.model.predict_proba(self.X_train)[:, 1])  
         roc_auc_score_test  = roc_auc_score(self.y_test, self.model.predict_proba(self.X_test)[:, 1])
-        print ('roc_auc_score for the train dataset: {:.2f}'.format(roc_auc_score_train))
+        print ('roc_auc_score for the train dataset: {:.3f}'.format(roc_auc_score_train))
         from sklearn.metrics import plot_roc_curve 
         
         #plt.figure(1).clf()
@@ -28,7 +28,7 @@ class Metric_pipeline(object):
         plt.title('Train ROC Curve')
         
         plt.show()
-        print ('roc_auc_score for the test dataset: {:.2f}'.format(roc_auc_score_test))
+        print ('roc_auc_score for the test dataset: {:.3f}'.format(roc_auc_score_test))
         plot_roc_curve(self.model, self.X_test, self.y_test)
         plt.title('Test ROC Curve')
         plt.show()
@@ -45,7 +45,7 @@ class Metric_pipeline(object):
         precision, recall, thresholds = precision_recall_curve(self.y_train, y_train_score)
       
         auc_precision_recall = auc(recall, precision)
-        print('train'+' PR-AUC is {:.2f}'.format(auc_precision_recall))
+        print('train'+' PR-AUC is {:.3f}'.format(auc_precision_recall))
         
         plt.plot(recall, precision)
         plt.xlabel('Recall(Positive label:1)')
@@ -59,7 +59,7 @@ class Metric_pipeline(object):
         y_test_score = y_test_proba[:, 1]
         precision, recall, thresholds = precision_recall_curve(self.y_test, y_test_score)
         auc_precision_recall = auc(recall, precision)
-        print('test'+' PR-AUC is {:.2f}'.format(auc_precision_recall))
+        print('test'+' PR-AUC is {:.3f}'.format(auc_precision_recall))
    
         plt.plot(recall, precision)
         plt.xlabel('Recall(Positive label:1)')
@@ -88,8 +88,8 @@ class Metric_pipeline(object):
         #####roc_auc_score
         roc_auc_score_train = roc_auc_score(self.y_train, self.model.predict_proba(self.X_train)[:, 1])  
         roc_auc_score_test  = roc_auc_score(self.y_test, self.model.predict_proba(self.X_test)[:, 1])
-        res.append(['roc_auc_score(train)','{:.2f}'.format(roc_auc_score_train)])
-        res.append(['roc_auc_score(test)','{:.2f}'.format(roc_auc_score_test)])
+        res.append(['roc_auc_score(train)','{:.3f}'.format(roc_auc_score_train)])
+        res.append(['roc_auc_score(test)','{:.3f}'.format(roc_auc_score_test)])
         
         
         
@@ -102,7 +102,7 @@ class Metric_pipeline(object):
 
         precision, recall, thresholds = precision_recall_curve(self.y_train, y_train_score)
         auc_precision_recall = auc(recall, precision)
-        res.append(['PR-AUC(train)','{:.2f}'.format(auc_precision_recall)])
+        res.append(['PR-AUC(train)','{:.3f}'.format(auc_precision_recall)])
         
         
         
@@ -111,15 +111,15 @@ class Metric_pipeline(object):
         y_test_score = y_test_proba[:, 1]
         precision, recall, thresholds = precision_recall_curve(self.y_test, y_test_score)
         auc_precision_recall = auc(recall, precision)
-        res.append(['PR-AUC(test)','{:.2f}'.format(auc_precision_recall)])
+        res.append(['PR-AUC(test)','{:.3f}'.format(auc_precision_recall)])
         
         #precision recall
         y_train_pred = self.model.predict(self.X_train)
         y_test_pred = self.model.predict(self.X_test)
-        res.append(['average_precision(train)','{:.2f}'.format(average_precision_score(self.y_train,y_train_score))])
-        res.append(['average_precision(test)','{:.2f}'.format(average_precision_score(self.y_test,y_test_score))])
-        res.append(['precision_score(train)','{:.2f}'.format(precision_score(self.y_train, y_train_pred, average='weighted'))])
-        res.append(['precision_score(test)','{:.2f}'.format(precision_score(self.y_test, y_test_pred, average='weighted'))])
+        res.append(['average_precision(train)','{:.3f}'.format(average_precision_score(self.y_train,y_train_score))])
+        res.append(['average_precision(test)','{:.3f}'.format(average_precision_score(self.y_test,y_test_score))])
+        res.append(['precision_score(train)','{:.3f}'.format(precision_score(self.y_train, y_train_pred, average='weighted'))])
+        res.append(['precision_score(test)','{:.3f}'.format(precision_score(self.y_test, y_test_pred, average='weighted'))])
         return pd.DataFrame(res)
 
 
